@@ -4,7 +4,7 @@ const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const path = require("path");
 
 module.exports = {
-  entry: "./src/index.tsx",
+  entry: "./src/index.ts",
   mode: "development",
   devServer: {
     static: path.join(__dirname, "dist"),
@@ -27,7 +27,12 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "simple-app",
+      name: "simpleApp",
+      filename: "remoteEntry.js",
+      exposes: {
+        "./app": "./src/App.tsx",
+      },
+      shared: { react: { singleton: true }, "react-dom": { singleton: true } },
       remotes: {
         single: "single@http://localhost:9002/remoteEntry.js",
       },
