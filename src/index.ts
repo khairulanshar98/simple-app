@@ -1,2 +1,3 @@
-//@ts-ignore
-import("./bootstrap.tsx");
+const start = () => import("./bootstrap");
+start();
+export default start;
